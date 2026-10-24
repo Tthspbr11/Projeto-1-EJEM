@@ -1,0 +1,41 @@
+:root {
+  --fundo: #fdf1f5;
+  --tinta: #2b1b3a;
+  --morango: #e8446f;
+  --pistache: #cfe8c3;
+  --mirtilo: #5b6bdb;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--tinta); line-height: 1.5; }
+main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+a { color: var(--mirtilo); }
+:focus-visible { outline: 3px solid var(--mirtilo); outline-offset: 2px; }
+
+.header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--pistache); }
+.header nav { display: flex; gap: 1.25rem; align-items: center; }
+.header a { text-decoration: none; color: var(--tinta); font-weight: 500; }
+.logo { font-size: 1.5rem; font-weight: 700; }
+.carrinho span { background: var(--morango); color: #fff; border-radius: 99px; padding: 0 .55rem; margin-left: .25rem; }
+
+.hero { padding: 3rem 0; }
+.hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; max-width: 14ch; }
+.cta, button { background: var(--morango); color: #fff; border: 0; border-radius: 12px; padding: .7rem 1.2rem; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+button:disabled { opacity: .6; cursor: wait; }
+
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.card { background: #fff; border-radius: 20px; padding: 1rem; display: grid; gap: .5rem; }
+.bola { width: 72px; height: 72px; border-radius: 50%; }
+.card h3, .card p { margin: 0; }
+label { display: grid; gap: .25rem; font-weight: 500; }
+select, input { font: inherit; padding: .55rem; border: 2px solid #e4cfe0; border-radius: 10px; background: #fff; }
+
+.lista { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.lista li { display: grid; grid-template-columns: 1fr auto auto auto; gap: .75rem; align-items: center; background: #fff; padding: .6rem .9rem; border-radius: 14px; }
+.qtd { display: flex; gap: .5rem; align-items: center; }
+.qtd button { padding: .1rem .6rem; }
+.total { font-size: 1.25rem; }
+.form { display: grid; gap: .75rem; max-width: 420px; }
+.erro { color: #b3173f; margin: 0; }
+
+@media (max-width: 560px) { .lista li { grid-template-columns: 1fr auto; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
