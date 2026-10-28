@@ -4,8 +4,8 @@ export default function Home() {
     return (
     <>
     <section className="hero">
-      <h1>Sorvete artesanal, direto na sua porta.</h1>
-      <p>Escolha o sabor, monte o carrinho e faça o pedido em poucos toques.</p>
+      <h1>Sorvete artesanal, pronto para você retirar!</h1>
+      <p>Escolha seus produtos, monte o carrinho e retire seu pedido no balcão.</p>
       <Link href="/cardapio" className="cta">Ver cardápio</Link>
     </section>
 

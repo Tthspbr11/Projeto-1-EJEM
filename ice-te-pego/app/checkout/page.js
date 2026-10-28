@@ -7,7 +7,6 @@ import { brl, formasPagamento } from "@/lib/sabores";
 export default function Checkout() {
   const { items, total, setQtd, remove, clear } = useCart();
   const [nome, setNome] = useState("");
-  const [endereco, setEndereco] = useState("");
   const [pagamento, setPagamento] = useState("");
   const [erro, setErro] = useState("");
   const [enviando, setEnviando] = useState(false);
@@ -17,20 +16,32 @@ export default function Checkout() {
     e.preventDefault();
     setErro("");
 
-    // Controle de erros (domínio): impede ações inválidas
-    if (items.length === 0) return setErro("Seu carrinho está vazio. Escolha ao menos um sabor.");
-    if (!nome.trim() || !endereco.trim()) return setErro("Preencha nome e endereço de entrega.");
-    if (!pagamento) return setErro("Selecione uma forma de pagamento.");
+    if (items.length === 0)
+      return setErro("Seu carrinho está vazio. Escolha ao menos um produto.");
+    if (!nome.trim())
+      return setErro("Preencha seu nome.");
+    if (!pagamento)
+      return setErro("Selecione uma forma de pagamento.");
 
     setEnviando(true);
+
     try {
       const res = await fetch("/api/pedidos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cliente: { nome, endereco }, pagamento, itens: items, total }),
+        body: JSON.stringify({
+          cliente: { nome, retirada: "Retirada no balcão" },
+          pagamento,
+          itens: items,
+          total,
+        }),
       });
+
       const dados = await res.json();
-      if (!res.ok) throw new Error(dados.erro || "Não foi possível enviar o pedido.");
+
+      if (!res.ok)
+        throw new Error(dados.erro || "Não foi possível enviar o pedido.");
+
       setPedido(dados.numero);
       clear();
     } catch (err) {
@@ -44,7 +55,8 @@ export default function Checkout() {
     return (
       <section className="hero">
         <h1>Pedido {pedido} recebido!</h1>
-        <p>Já estamos preparando seus gelados.</p>
+        <p>Seu pedido foi registrado para retirada no balcão.</p>
+        <p>Obrigado por escolher a Ice Te Pego!</p>
         <Link href="/cardapio" className="cta">Pedir mais</Link>
       </section>
     );
@@ -53,13 +65,15 @@ export default function Checkout() {
   return (
     <section>
       <h1>Seu pedido</h1>
+      <p>Faça seu pedido online e retire no balcão da Ice Te Pego.</p>
+
       {items.length === 0 ? (
         <p>Carrinho vazio. <Link href="/cardapio">Ver cardápio</Link></p>
       ) : (
         <ul className="lista">
           {items.map((i) => (
             <li key={i.id}>
-              <span>{i.sabor} ({i.tamanho})</span>
+              <span>{i.sabor}{i.tamanho ? ` (${i.tamanho})` : ""}</span>
               <span className="qtd">
                 <button type="button" onClick={() => setQtd(i.id, i.qtd - 1)} aria-label="Diminuir">−</button>
                 {i.qtd}
@@ -71,19 +85,39 @@ export default function Checkout() {
           ))}
         </ul>
       )}
+
       <p className="total">Total: <strong>{brl(total)}</strong></p>
 
       <form onSubmit={finalizar} className="form">
-        <label>Nome<input value={nome} onChange={(e) => setNome(e.target.value)} /></label>
-        <label>Endereço de entrega<input value={endereco} onChange={(e) => setEndereco(e.target.value)} /></label>
-        <label>Pagamento
-          <select value={pagamento} onChange={(e) => setPagamento(e.target.value)}>
+        <label>
+          Seu nome
+          <input
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Digite seu nome"
+          />
+        </label>
+
+        <label>
+          Forma de pagamento
+          <select
+            value={pagamento}
+            onChange={(e) => setPagamento(e.target.value)}
+          >
             <option value="">Selecione</option>
-            {formasPagamento.map((f) => <option key={f}>{f}</option>)}
+            {formasPagamento.map((f) => (
+              <option key={f} value={f}>{f}</option>
+            ))}
           </select>
         </label>
+
+        <p><strong>Modalidade:</strong> Retirada no balcão</p>
+
         {erro && <p className="erro" role="alert">{erro}</p>}
-        <button disabled={enviando}>{enviando ? "Enviando..." : "Finalizar pedido"}</button>
+
+        <button disabled={enviando}>
+          {enviando ? "Enviando..." : "Confirmar pedido para retirada"}
+        </button>
       </form>
     </section>
   );

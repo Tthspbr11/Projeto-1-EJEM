@@ -1,42 +1,71 @@
-"use client"; // precisa de interação (escolher tamanho e adicionar)
+"use client";
+
 import { useState } from "react";
+import Image from "next/image";
 import { useCart } from "./CartProvider";
-import { TAMANHOS, brl } from "@/lib/sabores";
+import { brl } from "@/lib/sabores";
 
 export default function ProdutoCard({ produto }) {
   const { add } = useCart();
-  const [tamanho, setTamanho] = useState("Médio");
+  const [opcao, setOpcao] = useState(produto.opcoes?.[0] || "");
   const [aviso, setAviso] = useState("");
 
   function adicionar() {
-    if (!TAMANHOS.includes(tamanho)) {
-      setAviso("Escolha um tamanho.");
-      return;
-    }
+    const nomeProduto = opcao
+      ? `${produto.sabor} - ${opcao}`
+      : produto.sabor;
+
     add({
-      id: `${produto.id}-${tamanho}`,
-      sabor: produto.sabor,
-      tamanho,
-      preco: produto.precos[tamanho],
+      id: opcao ? `${produto.id}-${opcao}` : String(produto.id),
+      sabor: nomeProduto,
+      preco: produto.preco,
     });
-    setAviso(`${produto.sabor} (${tamanho}) no carrinho`);
+
+    setAviso(`${nomeProduto} adicionado ao carrinho!`);
   }
 
   return (
     <article className="card">
-      {/* Troque por <Image> do next/image quando tiver as fotos em /public/sabores */}
-      <div className="bola" style={{ background: produto.cor }} aria-hidden="true" />
+      <Image
+        src={produto.imagem}
+        alt={produto.sabor}
+        width={300}
+        height={220}
+        style={{
+          width: "100%",
+          height: "200px",
+          objectFit: "cover",
+          borderRadius: "8px",
+        }}
+      />
+
       <h3>{produto.sabor}</h3>
       <p>{produto.descricao}</p>
-      <label>
-        Tamanho
-        <select value={tamanho} onChange={(e) => setTamanho(e.target.value)}>
-          {TAMANHOS.map((t) => (
-            <option key={t} value={t}>{t} · {brl(produto.precos[t])}</option>
-          ))}
-        </select>
-      </label>
-      <button onClick={adicionar}>Adicionar ao carrinho</button>
+
+      {produto.opcoes && (
+        <label>
+          Escolha o sabor:
+          <select
+            value={opcao}
+            onChange={(e) => setOpcao(e.target.value)}
+          >
+            {produto.opcoes.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      <p>
+        <strong>{brl(produto.preco)}</strong>
+      </p>
+
+      <button type="button" onClick={adicionar}>
+        Adicionar ao carrinho
+      </button>
+
       <small role="status">{aviso}</small>
     </article>
   );
