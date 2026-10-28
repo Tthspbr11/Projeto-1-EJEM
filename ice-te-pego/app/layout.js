@@ -9,8 +9,8 @@ const fonte = Fredoka({ subsets: ["latin"], display: "swap" });
 export const metadata = {
   title: "Ice Te Pego | Sorveteria artesanal com entrega de gelados",
   description:
-    "Sorveteria artesanal com entrega de gelados na sua cidade. Escolha o sabor, monte o carrinho e peça online.",
-  keywords: ["sorveteria artesanal", "entrega de gelados", "sorvete", "NOME DA CIDADE"],
+    "Sorveteria artesanal com entrega de gelados na sua cidade. Escolha o sabor, monte o carrinho e retire no balcão.",
+  keywords: ["sorveteria artesanal", "entrega de gelados", "sorvete", "São Paulo"],
   openGraph: { title: "Ice Te Pego", description: "Sorvete artesanal entregue na sua porta.", locale: "pt_BR", type: "website" },
 };
 
