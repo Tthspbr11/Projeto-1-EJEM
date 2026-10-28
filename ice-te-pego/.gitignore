@@ -1,0 +1,15 @@
+# Dependências
+node_modules/
+
+# Gerados pelo Next.js
+.next/
+
+# Vercel
+.vercel/
+
+# Variáveis de ambiente (senhas e chaves)
+.env
+.env*.local
+
+# Logs do npm
+npm-debug.log*
