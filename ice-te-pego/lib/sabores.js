@@ -3,8 +3,8 @@ export const TAMANHOS = [];
 export const sabores = [
   {
     id: 1,
-    sabor: "Sorvete de Casquinha",
-    descricao: "1 bola: baunilha, chocolate ou morango.",
+    sabor: "Casquinha Simples",
+    descricao: "1 bola de sorvete à escolha (baunilha, chocolate ou morango).",
     preco: 4.00,
     imagem: "/produtos/01-sorvete-casquinha.jpeg",
     opcoes: ["Baunilha", "Chocolate", "Morango"],
@@ -27,7 +27,7 @@ export const sabores = [
   {
     id: 4,
     sabor: "Casquinha Dupla",
-    descricao: "2 bolas de sorvete à escolha.",
+    descricao: "2 bolas de sorvete à escolha (baunilha, chocolate ou morango).",
     preco: 8.00,
     imagem: "/produtos/04-casquinha-dupla.jpeg",
     opcoes: ["Baunilha", "Chocolate", "Morango"],
