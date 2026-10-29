@@ -81,34 +81,38 @@ export default function Home() {
         </div>
       </section>
 
+      
       <section className="como-funciona">
-        <span className="subtitulo">É SIMPLES ASSIM</span>
-        <h2>Seu pedido em três passos</h2>
+        <div className="como-funciona-conteudo">
+          <span className="subtitulo">É SIMPLES ASSIM</span>
+          <h2>Seu pedido em três passos</h2>
 
-        <div className="passos-grid">
-          <article>
-            <span>1</span>
-            <h3>Escolha</h3>
-            <p>Explore o cardápio e selecione seus produtos favoritos.</p>
-          </article>
+          <div className="passos-grid">
+            <article>
+              <span>1</span>
+              <h3>Escolha</h3>
+              <p>Explore o cardápio e selecione seus produtos favoritos.</p>
+            </article>
 
-          <article>
-            <span>2</span>
-            <h3>Peça online</h3>
-            <p>Adicione tudo ao carrinho e escolha como pagar.</p>
-          </article>
+            <article>
+              <span>2</span>
+              <h3>Peça online</h3>
+              <p>Adicione tudo ao carrinho e escolha como pagar.</p>
+            </article>
 
-          <article>
-            <span>3</span>
-            <h3>Retire no balcão</h3>
-            <p>Faça seu pedido e retire na Ice Te Pego.</p>
-          </article>
+            <article>
+              <span>3</span>
+              <h3>Retire no balcão</h3>
+              <p>Faça seu pedido e retire na Ice Te Pego.</p>
+            </article>
+          </div>
+
+          <Link href="/cardapio" className="cta">
+            Fazer meu pedido →
+          </Link>
         </div>
-
-        <Link href="/cardapio" className="cta">
-          Fazer meu pedido →
-        </Link>
       </section>
+
 
       <section className="localizacao">
         <div className="localizacao-texto">

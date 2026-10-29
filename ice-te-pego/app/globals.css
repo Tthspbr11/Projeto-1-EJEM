@@ -1,81 +1,151 @@
+
 :root {
-  --fundo: #fdf1f5;      /* fundo da página */
-  --tinta: #ff5a61;      /* texto principal */
-  --morango: #addbbf;    /* botões e contador do carrinho */
-  --pistache: #12606c;   /* faixa do cabeçalho */
-  --mirtilo: #5b6bdb;    /* links e contorno de foco */
-  --cartao: #ffffff;     /* fundo dos cartões, da lista e dos campos */
-  --borda: #e9df00;      /* borda dos campos de formulário */
-  --texto-botao: #ffffff;/* texto dentro dos botões */
-  --erro: #b3173f;       /* mensagens de erro */
+  --fundo: #ffe2ee;
+  --tinta: #ff5a61;
+  --morango: #addbbf;
+  --pistache: #fbedcc;
+  --mirtilo: #5b6bdb;
+  --cartao: #ffffff;
+  --borda: #e9df00;
+  --texto-botao: #ffffff;
+  --erro: #b3173f;
 }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--fundo); color: var(--tinta); line-height: 1.5; }
-main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
-a { color: var(--mirtilo); }
-:focus-visible { outline: 3px solid var(--mirtilo); outline-offset: 2px; }
 
-.header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--pistache); }
-.header nav { display: flex; gap: 1.25rem; align-items: center; }
-.header a { text-decoration: none; color: var(--tinta); font-weight: 500; }
-.logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.carrinho span { background: var(--morango); color: var(--texto-botao); border-radius: 99px; padding: 0 .55rem; margin-left: .25rem; }
+* {
+  box-sizing: border-box;
+}
 
-.hero { padding: 3rem 0; }
-.hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; max-width: 14ch; }
-.cta, button { background: var(--morango); color: var(--texto-botao); border: 0; border-radius: 12px; padding: .7rem 1.2rem; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
-button:disabled { opacity: .6; cursor: wait; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--tinta);
+  line-height: 1.5;
+}
 
-.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-.card { background: var(--cartao); border-radius: 20px; padding: 1rem; display: grid; gap: .5rem; }
-.bola { width: 72px; height: 72px; border-radius: 50%; }
-.card h3, .card p { margin: 0; }
-label { display: grid; gap: .25rem; font-weight: 500; }
-select, input { font: inherit; padding: .55rem; border: 2px solid var(--borda); border-radius: 10px; background: var(--cartao); }
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
 
-.lista { list-style: none; padding: 0; display: grid; gap: .5rem; }
-.lista li { display: grid; grid-template-columns: 1fr auto auto auto; gap: .75rem; align-items: center; background: var(--cartao); padding: .6rem .9rem; border-radius: 14px; }
-.qtd { display: flex; gap: .5rem; align-items: center; }
-.qtd button { padding: .1rem .6rem; }
-.total { font-size: 1.25rem; }
-.form { display: grid; gap: .75rem; max-width: 420px; }
-.erro { color: var(--erro); margin: 0; }
-.foto { position: relative; width: 100%; height: 180px; border-radius: 14px; overflow: hidden; }
+a {
+  color: var(--mirtilo);
+}
 
-@media (max-width: 560px) { .lista li { grid-template-columns: 1fr auto; } }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+:focus-visible {
+  outline: 3px solid var(--mirtilo);
+  outline-offset: 2px;
+}
 
-/* Padronização dos cards do cardápio (cristiano) */
+/* Cabeçalho e navegação */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--pistache);
+}
+
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header a {
+  color: var(--tinta);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.carrinho span {
+  margin-left: 0.25rem;
+  padding: 0 0.55rem;
+  border-radius: 99px;
+  background: var(--morango);
+  color: var(--texto-botao);
+}
+
+/* Botões */
+.cta,
+button {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: 0;
+  border-radius: 10px;
+  background: #12606c;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover:not(:disabled),
+.cta:hover {
+  background: #388e3c;
+}
+
+button:active:not(:disabled),
+.cta:active {
+  background: #a5d6a7;
+  transform: scale(0.98);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:focus-visible,
+.cta:focus-visible {
+  outline: 2px solid #1b5e20;
+  outline-offset: 3px;
+}
+
+/* Estrutura geral do cardápio */
+.hero {
+  padding: 3rem 0;
+}
+
+.hero h1 {
+  max-width: 14ch;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.1;
+}
+
 .grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   align-items: stretch;
+  gap: 1rem;
 }
 
 .card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   height: 100%;
-  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 20px;
+  background: var(--cartao);
+  gap: 0.5rem;
 }
 
-.card > button {
-  margin-top: auto;
-  min-height: 44px;
-  flex-shrink: 0;
-}
-
-.card small[role="status"] {
-  display: block;
-  min-height: 2.5em;
-  margin-top: 8px;
-  line-height: 1.25;
-}
-
-/* Alinhamento dos produtos */
-.card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  box-sizing: border-box;
+.card h3,
+.card p {
+  margin: 0;
 }
 
 .card .descricao-produto {
@@ -88,9 +158,9 @@ select, input { font: inherit; padding: .55rem; border: 2px solid var(--borda); 
 }
 
 .card > button {
-  margin-top: 0;
-  min-height: 44px;
   flex-shrink: 0;
+  min-height: 44px;
+  margin-top: auto;
 }
 
 .card small[role="status"] {
@@ -100,26 +170,98 @@ select, input { font: inherit; padding: .55rem; border: 2px solid var(--borda); 
   line-height: 1.25;
 }
 
-/* Janela para escolher sabores */
+.bola {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+
+.foto {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Formulários */
+label {
+  display: grid;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+select,
+input {
+  padding: 0.55rem;
+  border: 2px solid var(--borda);
+  border-radius: 10px;
+  background: var(--cartao);
+  font: inherit;
+}
+
+.form {
+  display: grid;
+  max-width: 420px;
+  gap: 0.75rem;
+}
+
+.erro {
+  margin: 0;
+  color: var(--erro);
+}
+
+/* Lista de pedidos e carrinho */
+.lista {
+  display: grid;
+  padding: 0;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.lista li {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  border-radius: 14px;
+  background: var(--cartao);
+  gap: 0.75rem;
+}
+
+.qtd {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qtd button {
+  padding: 0.1rem 0.6rem;
+}
+
+.total {
+  font-size: 1.25rem;
+}
+
+/* Modal de escolha de sabores */
 .modal-fundo {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-sabores {
-  background: white;
-  color: #222;
   width: 100%;
   max-width: 400px;
   padding: 24px;
-  border-radius: 12px;
-  box-sizing: border-box;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #222222;
 }
 
 .modal-sabores h2 {
@@ -136,62 +278,21 @@ select, input { font: inherit; padding: .55rem; border: 2px solid var(--borda); 
   min-height: 44px;
   margin-bottom: 20px;
   padding: 8px;
-  box-sizing: border-box;
 }
 
 .botoes-modal {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .botoes-modal button {
   flex: 1;
   min-height: 44px;
   padding: 10px;
-  cursor: pointer;
 }
 
-/* Padrão visual dos botões verdes do site */
-button,
-.cta {
-  background-color: #4caf50;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
-}
-
-/* Escurece ao passar o mouse */
-button:hover:not(:disabled),
-.cta:hover {
-  background-color: #388e3c;
-}
-
-/* Clareia enquanto o botão está pressionado */
-button:active:not(:disabled),
-.cta:active {
-  background-color: #a5d6a7;
-  transform: scale(0.98);
-}
-
-/* Destaque ao navegar pelo teclado */
-button:focus-visible,
-.cta:focus-visible {
-  outline: 2px solid #1b5e20;
-  outline-offset: 3px;
-}
-
-/* Botões desativados */
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* Página inicial */
+/* Página inicial: apresentação */
 .inicio-hero {
   padding: 56px 24px;
   text-align: center;
@@ -220,17 +321,18 @@ button:disabled {
   line-height: 1.8;
 }
 
+/* Benefícios da loja */
 .beneficios {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
   max-width: 900px;
   margin: 48px auto 0;
+  gap: 20px;
 }
 
 .beneficios > div {
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   background: #ffffff;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
@@ -251,13 +353,15 @@ button:disabled {
   line-height: 1.6;
 }
 
+/* Espaçamento das seções da página inicial */
 .secao-inicio,
 .como-funciona,
 .localizacao,
 .chamada-final {
-  padding: 64px 24px;
+  padding: 56px 24px;
 }
 
+/* Seção do cardápio em destaque */
 .secao-inicio {
   background: #f7fbf5;
 }
@@ -293,14 +397,14 @@ button:disabled {
 .destaques-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
   max-width: 1100px;
   margin: 0 auto;
+  gap: 18px;
 }
 
 .destaque-item {
   padding: 26px 18px;
-  border-radius: 14px;
+  border-radius: 16px;
   background: #ffffff;
   text-align: center;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
@@ -319,31 +423,51 @@ button:disabled {
   line-height: 1.6;
 }
 
+
+/* É SIMPLES ASSIM: cartão separado das seções vizinhas */
 .como-funciona {
+  background: var(--fundo);
+  padding: 40px 24px;
   text-align: center;
+}
+
+.como-funciona-conteudo {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.como-funciona-conteudo h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
 }
 
 .passos-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  max-width: 1000px;
-  margin: 36px auto;
+  max-width: 860px;
+  margin: 26px auto;
+  gap: 16px;
 }
 
 .passos-grid article {
-  padding: 24px;
+  padding: 20px 16px;
   border: 1px solid #e4eee2;
-  border-radius: 14px;
+  border-radius: 16px;
+  background: #fffdfb;
 }
 
 .passos-grid article > span {
   display: inline-flex;
-  width: 46px;
-  height: 46px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 14px;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 12px;
   border-radius: 50%;
   background: #e8f5e9;
   color: #286b35;
@@ -355,12 +479,39 @@ button:disabled {
   line-height: 1.7;
 }
 
+.como-funciona-conteudo > .cta {
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .como-funciona {
+    padding: 30px 16px;
+  }
+
+  .como-funciona-conteudo {
+    padding: 26px 16px;
+    border-radius: 18px;
+  }
+
+  .passos-grid {
+    grid-template-columns: 1fr;
+    margin: 22px auto;
+    gap: 12px;
+  }
+
+  .passos-grid article {
+    padding: 18px 14px;
+    border-radius: 14px;
+  }
+}
+
+/* Localização e endereço */
 .localizacao {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   align-items: stretch;
-  gap: 36px;
   background: #f7fbf5;
+  gap: 36px;
 }
 
 .localizacao-texto {
@@ -370,12 +521,12 @@ button:disabled {
 
 .endereco-card {
   display: flex;
-  gap: 14px;
   align-items: flex-start;
   margin: 24px 0;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   background: #ffffff;
+  gap: 14px;
 }
 
 .endereco-card > span {
@@ -395,12 +546,13 @@ button:disabled {
 
 .mapa-container {
   min-height: 380px;
-  overflow: hidden;
-  border-radius: 16px;
+  border-radius: 18px;
   background: #e8eee6;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
+/* Chamada final e rodapé */
 .chamada-final {
   text-align: center;
 }
@@ -430,7 +582,7 @@ button:disabled {
   line-height: 1.6;
 }
 
-/* Ajustes para celulares e tablets */
+/* Tablets */
 @media (max-width: 800px) {
   .destaques-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -449,9 +601,15 @@ button:disabled {
   }
 }
 
+/* Celulares */
 @media (max-width: 600px) {
   .inicio-hero {
     padding: 40px 18px;
+  }
+
+  .inicio-hero .cta {
+    display: table;
+    margin: 0 auto;
   }
 
   .beneficios,
@@ -467,7 +625,22 @@ button:disabled {
   .como-funciona,
   .localizacao,
   .chamada-final {
-    padding: 44px 18px;
+    padding: 36px 16px;
+  }
+
+  .como-funciona-conteudo {
+    padding: 26px 16px;
+    border-radius: 18px;
+  }
+
+  .passos-grid {
+    margin: 24px auto;
+    gap: 12px;
+  }
+
+  .passos-grid article {
+    padding: 18px 14px;
+    border-radius: 14px;
   }
 
   .destaques-grid {
@@ -480,5 +653,42 @@ button:disabled {
 
   .mapa-container {
     min-height: 280px;
+  }
+}
+
+/* Ajustes específicos do cardápio em telas pequenas */
+@media (max-width: 560px) {
+  .grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  .card h3 {
+    font-size: 0.95rem;
+  }
+
+  .card > button {
+    padding: 8px 5px;
+    font-size: 0.85rem;
+  }
+
+  .lista li {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+/* Respeita a preferência por menos animações */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
   }
 }
